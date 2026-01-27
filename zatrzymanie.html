@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protokół Zatrzymania | Summer RP</title>
+    <link rel="icon" href="/KWP.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Mobilny Terminal Policyjny - KWP GDAŃSK</h1>
+    <h2>Summer RP</h2>
+
+    <div class="tab-buttons">
+        <button class="tab-btn" onclick="location.href='mandat.html'">Wystaw Mandat</button>
+        <button class="tab-btn" onclick="location.href='wniosek.html'">Wniosek do sądu</button>
+        <button class="tab-btn" onclick="location.href='raporty.html'">Raporty (Patrol / Interwencja)</button>
+        <button class="tab-btn active" onclick="location.href='zatrzymanie.html'">Protokół Zatrzymania</button>
+    </div>
+
+    <form id="zatrzymanieForm">
+        <label>Data i godzina zatrzymania:</label>
+        <input type="datetime-local" id="dataCzasZatrzymania" required />
+
+        <div class="row">
+            <div>
+                <label>Funkcjonariusz (Stopień + Imię i Nazwisko):</label>
+                <input type="text" id="funkcjonariuszZatrzymanie" required placeholder="np. sierż. sztab. Marek Nowak" />
+            </div>
+            <div>
+                <label>Nick Funkcjonariusza (OOC):</label>
+                <input type="text" id="nickFuncZatrzymanie" required placeholder="np. Funkcjonariusz#1234" />
+            </div>
+        </div>
+
+        <label>Imię i Nazwisko osoby zatrzymanej (IC):</label>
+        <input type="text" id="osobaZatrzymanaIC" required placeholder="np. Tomasz Malinowski" />
+
+        <label>ID / Numer dowodu osoby zatrzymanej (opcjonalnie):</label>
+        <input type="text" id="idDowodZatrzymanie" placeholder="np. 90021204856" />
+
+        <label>Miejsce zatrzymania:</label>
+        <input type="text" id="miejsceZatrzymania" required placeholder="np. Gdańsk, ul. Długa 12, przed budynkiem banku" />
+
+        <label>Powód zatrzymania:</label>
+        <textarea id="powodZatrzymania" required placeholder="np. Ucieczka przed kontrolą, posiadanie nielegalnej broni, pobicie, itp."></textarea>
+
+        <label>Zabezpieczone przedmioty (jeśli dotyczy, każdy w nowej linii):</label>
+        <textarea id="zabezpieczonePrzedmioty" placeholder="Pistolet Glock 17&#10;Gotówka 12 000 PLN&#10;Prawo jazdy z fałszywymi danymi"></textarea>
+
+        <label>Czas trwania zatrzymania:</label>
+        <input type="text" id="czasTrwaniaZatrzymania" required placeholder="np. od 22:15 do 23:05 – 50 minut" />
+
+        <label>Uwagi końcowe (zachowanie, adwokat, itp.):</label>
+        <textarea id="uwagiZatrzymanie" placeholder="Osoba zatrzymana nie stawiała oporu. Skontaktowano się z adwokatem."></textarea>
+
+        <label>Data sporządzenia protokołu:</label>
+        <input type="date" id="dataSporzadzeniaZatrzymania" required />
+
+        <button type="button" class="send-btn" onclick="sendZatrzymanieProtocol()">Wyślij Protokół Zatrzymania</button>
+    </form>
+
+    <div id="statusZatrzymanie"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

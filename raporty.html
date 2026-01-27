@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raporty | Summer RP</title>
+    <link rel="icon" href="/KWP.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Mobilny Terminal Policyjny - KWP GDAŃSK</h1>
+    <h2>Summer RP</h2>
+
+    <div class="tab-buttons">
+        <button class="tab-btn" onclick="location.href='mandat.html'">Wystaw Mandat</button>
+        <button class="tab-btn" onclick="location.href='wniosek.html'">Wniosek do sądu</button>
+        <button class="tab-btn active" onclick="location.href='raporty.html'">Raporty (Patrol / Interwencja)</button>
+        <button class="tab-btn" onclick="location.href='zatrzymanie.html'">Protokół Zatrzymania</button>
+    </div>
+
+    <form id="raportForm">
+        <label>Rodzaj raportu:</label>
+        <select id="rodzajRaportu" onchange="toggleRaportType()">
+            <option value="patrol">📋 RAPORT ZE SŁUŻBY / PATROLU</option>
+            <option value="interwencja">📄 RAPORT Z INTERWENCJI</option>
+        </select>
+
+        <div id="patrolFields">
+            <label>Komenda:</label>
+            <input type="text" id="komendaPatrol" value="Komenda Wojewódzka Policji w Gdańsku – Summer RP" />
+
+            <div class="row">
+                <div>
+                    <label>Data służby:</label>
+                    <input type="date" id="dataSluzby" />
+                </div>
+                <div>
+                    <label>Czas trwania służby:</label>
+                    <input type="text" id="czasTrwania" placeholder="np. 18:00–20:00" />
+                </div>
+            </div>
+
+            <label>Skład patrolu (oddzielone nową linią):</label>
+            <textarea id="skladPatrolu" placeholder="sierż. szt. Marek Nowak&#10;mł. asp. Anna Jankowska"></textarea>
+
+            <label>Rodzaj patrolu:</label>
+            <div class="checkbox-grid">
+                <label><input type="checkbox" name="rodzaj" value="Zmotoryzowany" checked> Zmotoryzowany</label>
+                <label><input type="checkbox" name="rodzaj" value="Pieszy"> Pieszy</label>
+                <label><input type="checkbox" name="rodzaj" value="Prewencyjny"> Prewencyjny</label>
+                <label><input type="checkbox" name="rodzaj" value="Kryminalny"> Kryminalny</label>
+                <label><input type="checkbox" name="rodzaj" value="Inny"> Inny</label>
+            </div>
+            <input type="text" id="rodzajInny" placeholder="Jeżeli 'Inny' – wpisz opis" style="margin-top:8px;" />
+
+            <label>Obszar patrolu:</label>
+            <input type="text" id="obszarPatrolu" placeholder="np. Gdańsk – Śródmieście, Wrzeszcz" />
+
+            <label>Wykonane czynności (krótko, każdy w nowej linii):</label>
+            <textarea id="czynnosciPatrolu" placeholder="Kontrola 5 pojazdów&#10;Sprawdzenie 3 osób w systemie KSIP&#10;Udzielenie pomocy..."></textarea>
+
+            <label>Incydenty i interwencje:</label>
+            <textarea id="incydentyPatrolu" placeholder='Jeśli były – krótki opis lub "Brak"'></textarea>
+
+            <label>Uwagi własne:</label>
+            <textarea id="uwagiPatrolu" placeholder="Np. Patrol przebiegł spokojnie..."></textarea>
+
+            <label>Raport sporządził (stopień + imię i nazwisko):</label>
+            <input type="text" id="sporadzilPatrol" placeholder="np. sierż. szt. Marek Nowak" />
+
+            <div class="row">
+                <div>
+                    <label>Data sporządzenia:</label>
+                    <input type="date" id="dataSporzadzeniaPatrol" />
+                </div>
+                <div>
+                    <label>&nbsp;</label>
+                    <button type="button" class="send-btn" onclick="sendPatrolReport()">Wyślij raport patrolu</button>
+                </div>
+            </div>
+            <div id="statusRaportPatrol"></div>
+        </div>
+
+        <div id="interwencjaFields" style="display:none;">
+            <label>Komenda:</label>
+            <input type="text" id="komendaInterw" value="Komenda Wojewódzka Policji w Gdańsku – Summer RP" />
+
+            <div class="row">
+                <div>
+                    <label>Data i godzina interwencji:</label>
+                    <input type="datetime-local" id="dataCzasInterw" />
+                </div>
+                <div>
+                    <label>Miejsce zdarzenia:</label>
+                    <input type="text" id="miejsceInterw" placeholder="np. Stacja paliw – ul. Leśna 13, Gdańsk" />
+                </div>
+            </div>
+
+            <label>Zgłoszenie:</label>
+            <input type="text" id="zgłoszenieInterw" placeholder="np. Podejrzenie napadu z bronią – zgłoszenie przez 112" />
+
+            <label>Funkcjonariusze uczestniczący (oddzielone nową linią):</label>
+            <textarea id="funkcjonariuszeInterw" placeholder="st. post. Jan Kamiński&#10;sierż. szt. Marek Nowak"></textarea>
+
+            <label>Opis przebiegu interwencji:</label>
+            <textarea id="opisInterw" placeholder="Np. Po przybyciu na miejsce..."></textarea>
+
+            <label>Zatrzymane osoby (jeśli dotyczy):</label>
+            <textarea id="zatrzymaneOsoby" placeholder="Imię i Nazwisko – powód zatrzymania&#10;Przewieziono na KWP..."></textarea>
+
+            <label>Dowody zabezpieczone (każdy w nowej linii):</label>
+            <textarea id="dowodyInterw" placeholder="Pistolet Glock 17&#10;Gotówka 12 000 PLN&#10;Nagranie z monitoringu"></textarea>
+
+            <label>Uwagi końcowe:</label>
+            <textarea id="uwagiInterw" placeholder="Np. Sprawa przekazana do WDŚ..."></textarea>
+
+            <label>Raport sporządził (stopień + imię i nazwisko):</label>
+            <input type="text" id="sporadzilInterw" placeholder="np. sierż. szt. Marek Nowak" />
+
+            <div class="row">
+                <div>
+                    <label>Data sporządzenia:</label>
+                    <input type="date" id="dataSporzadzeniaInterw" />
+                </div>
+                <div>
+                    <label>&nbsp;</label>
+                    <button type="button" class="send-btn" onclick="sendInterwReport()">Wyślij raport interwencji</button>
+                </div>
+            </div>
+            <div id="statusRaportInterw"></div>
+        </div>
+
+        <div id="statusRaport" style="margin-top:14px;"></div>
+    </form>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

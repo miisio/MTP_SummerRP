@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wniosek do sądu | Summer RP</title>
+    <link rel="icon" href="/KWP.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Mobilny Terminal Policyjny - KWP GDAŃSK</h1>
+    <h2>Summer RP</h2>
+
+    <div class="tab-buttons">
+        <button class="tab-btn" onclick="location.href='mandat.html'">Wystaw Mandat</button>
+        <button class="tab-btn active" onclick="location.href='wniosek.html'">Wniosek do sądu</button>
+        <button class="tab-btn" onclick="location.href='raporty.html'">Raporty (Patrol / Interwencja)</button>
+        <button class="tab-btn" onclick="location.href='zatrzymanie.html'">Protokół Zatrzymania</button>
+    </div>
+
+    <form id="wniosekForm">
+        <label>Imię i nazwisko ukaranego:</label>
+        <input type="text" id="ukarany" required placeholder="np. Tomasz Malinowski" />
+
+        <label>Nick (OOC):</label>
+        <input type="text" id="nickWniosek" placeholder="np. Malina#1122" />
+
+        <label>Rodzaj wniosku:</label>
+        <select id="typWniosku" onchange="toggleWniosekType()" required>
+            <option value="odmowa" selected>Odmowa mandatu</option>
+            <option value="sad">Sprawa przekazana do sądu</option>
+        </select>
+
+        <!-- 1) ODMOWA MANDATU -->
+        <div id="wniosekOdmowa">
+            <div class="row">
+                <div>
+                    <label>Data wystawienia mandatu:</label>
+                    <input type="date" id="dataMandatu" />
+                </div>
+                <div>
+                    <label>Typ mandatu / wykroczenia:</label>
+                    <input type="text" id="typMandatu" placeholder="np. Przekroczenie prędkości" />
+                </div>
+            </div>
+
+            <label>Kwota mandatu (PLN):</label>
+            <input type="number" id="kwotaMandatu" min="0" placeholder="np. 5000" />
+
+            <label>Opis sprawy / powód odmowy:</label>
+            <textarea id="powodOdmowa" placeholder="Np. Odmowa przyjęcia mandatu, wyjaśnienie okoliczności..." required></textarea>
+        </div>
+
+        <!-- 2) SPRAWA PRZEKAZANA DO SĄDU -->
+        <div id="wniosekSad" style="display:none;">
+            <div class="row">
+                <div>
+                    <label>Data i godzina zdarzenia:</label>
+                    <input type="datetime-local" id="dataCzasZdarzeniaSad" />
+                </div>
+                <div>
+                    <label>Miejsce zdarzenia:</label>
+                    <input type="text" id="miejsceSad" placeholder="np. Gdańsk, ul. Długa 12" />
+                </div>
+            </div>
+
+            <label>Kwalifikacja / podstawa (artykuł):</label>
+            <input type="text" id="kwalifikacjaSad" placeholder='np. Art. 97 KW / Art. 92 KW' />
+
+            <label>Opis sprawy (co się wydarzyło):</label>
+            <textarea id="opisSad" placeholder="Opisz przebieg zdarzenia..." required></textarea>
+
+            <label>Dowody / materiały (opcjonalnie):</label>
+            <textarea id="dowodySad" placeholder="Np. nagranie z bodycam, monitoring, zeznania świadków..."></textarea>
+        </div>
+
+        <button type="submit">Wyślij wniosek</button>
+    </form>
+
+    <div id="statusWniosek"></div>
+
+    <div class="help-block">
+        Jeśli po kliknięciu w "Wyślij wniosek" zobaczysz komunikat błędu typu "Failed to fetch" lub informację o CORS — oznacza to, że Discord blokuje żądanie z przeglądarki (brak odpowiednich nagłówków CORS). W takim wypadku:
+        <ul>
+            <li>uruchom plik z serwera (nie z systemu plików), lub</li>
+            <li>użyj prostego serwera-proxy po Twojej stronie, który przekaże żądanie do webhooka.</li>
+        </ul>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

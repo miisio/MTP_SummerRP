@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mandat | Summer RP</title>
+    <link rel="icon" href="/KWP.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Mobilny Terminal Policyjny - KWP GDAŃSK</h1>
+    <h2>Summer RP</h2>
+
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="location.href='mandat.html'">Wystaw Mandat</button>
+        <button class="tab-btn" onclick="location.href='wniosek.html'">Wniosek do sądu</button>
+        <button class="tab-btn" onclick="location.href='raporty.html'">Raporty (Patrol / Interwencja)</button>
+        <button class="tab-btn" onclick="location.href='zatrzymanie.html'">Protokół Zatrzymania</button>
+    </div>
+
+    <form id="mandatForm">
+        <label>Imię i nazwisko ukaranego:</label>
+        <input type="text" id="imie" required placeholder="np. Tomasz Malinowski" />
+
+        <label>Nick (OOC):</label>
+        <input type="text" id="nick" required placeholder="np. Malina#1122" />
+
+        <div class="row">
+            <div>
+                <label>Data i godzina wystawienia:</label>
+                <input type="datetime-local" id="dataWystawienia" required />
+            </div>
+            <div>
+                <label>Godzina zdarzenia:</label>
+                <input type="time" id="godzinaZdarzenia" required />
+            </div>
+        </div>
+
+        <label>Miejsce zdarzenia:</label>
+        <input type="text" id="miejsce" required placeholder="np. Gdańsk, ul. Długa" />
+
+        <label>Przyczyna nałożenia mandatu:</label>
+        <select id="przyczyna" required onchange="pokazPoleArtykulu()">
+            <option value="" disabled selected>Wybierz przyczynę</option>
+            <option>Wykroczenia drogowe</option>
+            <option>Wykroczenia porządkowe i administracyjne</option>
+            <option>Wykroczenia przeciwko obrotowi towarów i usług</option>
+            <option>Wykroczenia przeciwko bezpieczeństwu i porządkowi publicznemu</option>
+            <option value="inne">Inne</option>
+        </select>
+
+        <div id="innePrzyczynaDiv" style="display:none; margin-top: 10px;">
+            <label>Podaj dokładny artykuł:</label>
+            <input type="text" id="innePrzyczyna" placeholder="Np. Art. 97 Kodeksu wykroczeń" />
+            <div class="small-note">Pole wymagane: wpisz artykuł / paragraf (np. "Art. 92 KW").</div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label>Kwota mandatu (PLN):</label>
+                <input type="number" id="kwota" min="1" required placeholder="np. 5000" />
+            </div>
+            <div>
+                <label>Punkty karne:</label>
+                <input type="number" id="punkty" min="0" required placeholder="np. 10" />
+            </div>
+        </div>
+
+        <label>Typ pojazdu:</label>
+        <input type="text" id="pojazd" placeholder="np. Mini van" required />
+
+        <label>Funkcjonariusz (imię i stopień):</label>
+        <input type="text" id="funkcjonariusz" placeholder="np. sierż. sztab. Marek Nowak" required />
+
+        <button type="submit">Wyślij mandat</button>
+    </form>
+
+    <div id="statusMandat"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
